@@ -10,12 +10,18 @@ npm install
 ```
 2. <i class="icon-file"></i> En el archivo: **gulpfile.js** modificar la ruta de destino:
 ```
-const DEST = './destino'; 
+const DEST = './destino';
 ```
-## Uso ##
-1. Para ejecutar una unica vez, ejecutar en terminal:
+## Uso 1 ##
+Para ejecutar una unica vez, ejecutar en terminal:
 ```
 gulp copyToDist
+```
+
+## Uso 2 ##
+Para ejecutar una watch, ejecutar en terminal:
+```
+gulp watchCopyToDist
 ```
 
 > **Nota:** En la consola se imprimen los nombres de los archivos actualizados.
