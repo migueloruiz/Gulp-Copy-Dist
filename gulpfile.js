@@ -1,16 +1,52 @@
-var gulp = require('gulp');
-var filenames = require("gulp-filenames");
-var print = require('gulp-print');
-var fs = require('fs');
+const gulp = require('gulp');
+const changed = require('gulp-changed');
+const print = require('gulp-print');
 
-gulp.task('copy', function() {
-    gulp.src('./*.html')
-    fs.writeFile('filename.txt', 'contents', print());
-    // .pipe(filenames('all','relative'))
-    // Perform minification tasks, etc here
-    gulp.pipe(gulp.dest('../../../../Users/Miguelo/Desktop/dropbox'));
+//====================================
+// Ruta de destino
+//====================================
+const DEST = './dist';
+
+//====================================
+// funcion de copiado
+//====================================
+gulp.task('copyToDist', function() {
+    console.log("Copiando archivos...");
+    gulp.src([
+        'index.html',
+        '*paralimpicos/**/*.html',
+        '*paralimpicos/**/*.css',
+        '*paralimpicos/**/*.js',
+        '*paralimpicos/**/*.json',
+        '*paralimpicos/**/*.csv',
+        '*paralimpicos/**/*.xml', // <- NO olvidar borrar la coma
+        // es posible eliminar los siguientes archivos
+        '*paralimpicos/**/*.png',
+        '*paralimpicos/**/*.ico',
+        '*paralimpicos/**/fonts/*',
+        '*paralimpicos/**/img/*'
+    ])
+    .pipe(changed(DEST, {hasChanged: changed.compareSha1Digest}))
+    .pipe(print())
+    .pipe(gulp.dest(DEST));
 });
 
-gulp.task('taskname', function(cb){
-  fs.writeFile('filename.txt', 'contents', cb);
+//====================================
+// Copiado activo
+//====================================
+gulp.task('watchCopyToDist',['copyToDist'], function() {
+  gulp.watch([
+      'index.html',
+      '*paralimpicos/**/*.html',
+      '*paralimpicos/**/*.css',
+      '*paralimpicos/**/*.js',
+      '*paralimpicos/**/*.json',
+      '*paralimpicos/**/*.csv',
+      '*paralimpicos/**/*.xml', // <- NO olvidar borrar la coma
+      // es posible eliminar los siguientes archivos
+      '*paralimpicos/**/*.png',
+      '*paralimpicos/**/*.ico',
+      '*paralimpicos/**/fonts/*',
+      '*paralimpicos/**/img/*'
+  ], ['copyToDist']);
 });
