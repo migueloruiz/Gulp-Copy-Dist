@@ -1,0 +1,16 @@
+{
+  "name": "gulp_copy",
+  "version": "0.0.1",
+  "description": "Gulp para actualizar archivos de produccion automaticamente",
+  "main": "gulpfile.js",
+  "scripts": {
+    "start": "gulp"
+  },
+  "author": "@hola_miguelo",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-filenames": "^3.0.0",
+    "gulp-print": "^2.0.1"
+  }
+}
